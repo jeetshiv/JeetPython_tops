@@ -1,0 +1,432 @@
+task:1
+	> Database:create database practices
+	> Table 1:
+
+		CREATE TABLE product
+		(
+ 			prd_id int(100) PRIMARY KEY AUTO_INCREMENT ,
+    			prd_name varchar(100),
+    			recommended_price varchar(100),
+    			category varchar(100)
+		);
+		
+	>Table 2:
+		CREATE TABLE customer
+		(
+    
+    			customerid int(100) PRIMARY KEY AUTO_INCREMENT,
+			firstname varchar(100),
+    			lastname varchar(100),
+    			city varchar(100),
+    			state varchar(100),
+    			zip varchar(100)
+		);
+	>Table 3:
+		CREATE TABLE sales
+		(
+			sales_id int(100) PRIMARY KEY AUTO_INCREMENT,
+    			product_id int(100),
+    			cust_id int(100),
+    			salesprice varchar(100),
+    			salesdate date,
+    
+   			FOREIGN KEY(product_id) REFERENCES product(prd_id),
+    			FOREIGN KEY(cust_id) REFERENCES customer(customerid)
+		);		
+	
+	>Table 4:
+			
+		CREATE TABLE project
+		(
+			projectid varchar(100),  
+    			duration varchar(200)
+		);
+	>Table 5:
+		CREATE TABLE country
+		(
+			cid varchar(100),
+    			cname varchar(200)
+		);
+	
+	>Table 6:
+		
+		CREATE TABLE clienttable
+		(
+			clientid varchar(100),
+    			clientname varchar(100),
+    			cid varchar(100)
+		);
+
+	>Table 7:
+		CREATE TABLE empproject
+		(
+			empid int(100),
+   		        projectid varchar(100),
+    			clientid varchar(100),
+    			startyear varchar(100),
+    			endyear varchar(100)
+		);
+
+
+
+	> insert data in product table
+		
+	   insert into product(prd_id,prd_name,recommended_price,category) values(1,'Laptop',60000,'Electronics');
+	   insert into product(prd_id,prd_name,recommended_price,category) values(2,'Television',65000,'Electronics');
+	   insert into product(prd_id,prd_name,recommended_price,category) values(3,'Car',50000,'Automobile');
+	
+	> insert data in customer table	
+
+	  insert into customer(customerid,firstname,lastname,city,state,zip) VALUES(1,'ram','raja','bhavnagar','gujarat',364001);
+	  insert into customer(customerid,firstname,lastname,city,state,zip) VALUES(2,'bharat','raja','surat','gujarat',364002);
+	  insert into customer(customerid,firstname,lastname,city,state,zip) VALUES(3,'sita','raja','vadodara','gujarat',364003);
+	  insert into customer(customerid,firstname,lastname,city,state,zip) VALUES(4,'suram','raja','bhavnagar','gujarat',364004);
+          insert into customer(customerid,firstname,lastname,city,state,zip) VALUES(5,'sona','raja','bhavnagar','gujarat',364005);
+
+
+	> insert data in sales table
+	  
+	  insert into sales(sales_id,product_id,cust_id,salesprice,salesdate) VALUES(1,1,1,55000,'2022-03-02');
+	  insert into sales(sales_id,product_id,cust_id,salesprice,salesdate) VALUES(2,2,2,50000,'2020-03-05');
+	  insert into sales(sales_id,product_id,cust_id,salesprice,salesdate) VALUES(3,3,3,45000,'2018-03-04');
+	  insert into sales(sales_id,product_id,cust_id,salesprice,salesdate) VALUES(4,2,4,52000,'2015-02-01');
+	  insert into sales(sales_id,product_id,cust_id,salesprice,salesdate) VALUES(5,3,5,50000,'2011-04-01');		
+	  insert into sales(sales_id,product_id,cust_id,salesprice,salesdate) VALUES(6,2,5,50000,'2011-05-02');
+			
+	>insert data in project table
+
+		INSERT INTO project(projectid,duration) VALUES('p-1',23);
+		INSERT INTO project(projectid,duration) VALUES('p-2',15);
+		INSERT INTO project(projectid,duration) VALUES('p-3',45);
+		INSERT INTO project(projectid,duration) VALUES('p-4',2);
+		INSERT INTO project(projectid,duration) VALUES('p-5',30);
+	
+	>insert data in country table
+
+			INSERT into country(cid,cname) VALUES('c-1','India');
+			INSERT into country(cid,cname) VALUES('c-2','USA');
+			INSERT into country(cid,cname) VALUES('c-3','China');
+			INSERT into country(cid,cname) VALUES('c-4','Pakistan');
+			INSERT into country(cid,cname) VALUES('c-5','Russia');
+	
+	>insert data into client table		
+
+			INSERT INTO clienttable(clientid,clientname,cid) VALUES('c1-1','ABC Group','c-1');
+			INSERT INTO clienttable(clientid,clientname,cid) VALUES('c1-2','PQR','c-1');
+			INSERT INTO clienttable(clientid,clientname,cid) VALUES('c1-3','XYZ','c-2');
+			INSERT INTO clienttable(clientid,clientname,cid) VALUES('c1-4','tech altum','c-3');
+			INSERT INTO clienttable(clientid,clientname,cid) VALUES('c1-5','mnp','c-5');
+	
+	>insert data in emp project table
+
+		INSERT INTO empproject(empid,projectid,clientid,startyear,endyear) VALUES(101,'p-1','c1-1','2010','2010');
+		INSERT INTO empproject(empid,projectid,clientid,startyear,endyear) VALUES(102,'p-2','c1-2','2010','2012');
+		INSERT INTO empproject(empid,projectid,clientid,startyear,endyear) VALUES(103,'p-1','c1-3','2013','');
+		INSERT INTO empproject(empid,projectid,clientid,startyear,endyear) VALUES(104,'p-4','c1-1','2014','2015');
+		INSERT INTO empproject(empid,projectid,clientid,startyear,endyear) VALUES(105,'p-4','c1-5','2015','');
+
+
+
+		query 1:Return the FirstName, LastName , ProductName and Sales Price for all products sold in month of October 2022 
+
+		solution 1:	method 1:
+				
+			select customer.firstname,customer.lastname,product.prd_name,sales.salesprice FROM customer JOIN product JOIN sales ON sales.salesdate='2022-03-02'
+			
+				method 2(true):	
+			select customer.firstname,customer.lastname,product.prd_name,sales.salesprice FROM customer JOIN product ON customer.customerid=product.prd_id JOIN sales ON sales.salesdate='2022-03-02';
+
+		query 2: Return the CustomerID, FirstName, and LastName of those individuals in the Customer table who 
+                          have made no Sales purchases.
+		solution 2:
+			select * from customer where customer.customerid not in (select cust_id from sales)
+		
+		query 3:Return the FirstName, LastName, SalePrice, Recommended SalePrice, and the difference between the 
+				SalePrice and Recommended SalePrice for all Sales. The difference must be returned as a positive number
+			 
+		solution 3:
+
+			SELECT customer.customerid,customer.firstname,customer.lastname,sales.salesprice,product.recommended_price, SUM(product.recommended_price-sales.salesprice) FROM customer JOIN sales ON customer.customerid=sales.cust_id JOIN product GROUP BY customer.customerid;
+			
+		query 4:
+			 Add the following Customer and Sale information to the database. (using store procedure) 
+				
+				FirstName : Mansi 
+				LastName : Joshi
+				City: Mumbai 
+				State:MH 
+				Zip:400001 
+				ProductID:3 
+				SalePrice:205 
+				SaleDate:05/12/2022
+			
+		solution 4:
+					DELIMITER $$
+					CREATE PROCEDURE insertassign()
+					BEGIN
+
+						INSERT INTO customer(firstname,lastname,city,state,zip) VALUES('purvang','vyas','bhavnagar','gujarat',364001);
+    						INSERT INTO product(prd_id) VALUES('7');
+    						INSERT INTO sales(salesprice,salesdate) VALUES(75000,'2022-09-02');
+					END			
+		query 5:
+			Return the Product Category and the average Sale Price for those customers who have purchased two or more products.
+
+		solution 5:
+			SELECT product.category,AVG(sales.salesprice),COUNT(sales.cust_id)>2 FROM sales,product;
+
+		
+		query 6:
+			Update the Sale Price to the Recommended Sale Price of those Sales occurring between 
+			6/10/2022and6/20/2022
+		solution 6:
+			UPDATE sales,product SET salesprice=recommended_price WHERE salesdate BETWEEN '2020-02-10' AND '2020-03-10';
+
+
+		query 7:
+			Number of Sales by Product Category where the average Recommended Priceis10 or more dollars 
+			greater than the average Sale Price.
+
+		solution 7:
+			SELECT AVG(product.recommended_price),AVG(sales.salesprice) FROM product,sales WHERE product.recommended_price >60000 AND sales.salesprice
+		
+		query 8:) Largest order taken by each salesperson, date wise.
+
+		solution 8:
+			SELECT cust_id,MAX(salesprice),salesdate FROM sales GROUP BY cust_id ORDER BY salesdate;		
+
+
+		query 9:) Without using a declared iterative construct, return Sale Date and the running total for all sales, 
+				ordered by the Sale Date in Ascending Order.			
+		solution 9:
+			    SELECT salesdate,SUM(salesprice) FROM sales JOIN product GROUP BY product_id ORDER BY salesdate		
+
+Task 2:
+		
+		>CREATE DATABASE practices2;
+
+		>Table 1
+		
+			CREATE TABLE employee
+			(
+    
+    				empid int(200),
+    				empname varchar(100),
+    				department varchar(200),
+    				contactno varchar(100),
+    				emailid varchar(100),
+    				empheadid varchar(100)
+    			)
+		>Table 2
+				
+			CREATE TABLE empdept
+			(
+				deptid varchar(100),
+    				deptname varchar(100),
+    				deptoff varchar(100),
+    				depthead varchar(100)
+			)
+
+		>Table 3
+			CREATE TABLE empsalary
+			(
+    				empid int(100),
+    				salary int(100),
+    				ispermanent varchar(100)
+    
+   			 );
+	
+		
+
+			
+	
+		>insert data in employee table
+		
+		INSERT INTO employee(empid,empname,department,contactno,emailid,empheadid) VALUES(101,'Isha','E-101','1234567890','isha@gmail.com',105);
+		INSERT INTO employee(empid,empname,department,contactno,emailid,empheadid) VALUES(102,'priya','E-104','1234567890','priya@yahoo.com',103);
+		INSERT INTO employee(empid,empname,department,contactno,emailid,empheadid) VALUES(103,'neha','E-101','1234567890','neha@gmail.com',101);
+		INSERT INTO employee(empid,empname,department,contactno,emailid,empheadid) VALUES(104,'rahul','E-102','1234567890','rahul@yahoo.com',105);
+		INSERT INTO employee(empid,empname,department,contactno,emailid,empheadid) VALUES(105,'Abhishek',' E-101','1234567890','abhishek@ygmail.com',102);
+
+		
+		>insert data in empdept table
+		
+		INSERT INTO empdept(deptid,deptname,deptoff,depthead) VALUES('E-101 ','HR','Monday','105');
+		INSERT INTO empdept(deptid,deptname,deptoff,depthead) VALUES('E-102',' Development',' Tuesday','101');
+		INSERT INTO empdept(deptid,deptname,deptoff,depthead) VALUES('E-103 ',' Hous Keeping',' Saturday','103');
+		INSERT INTO empdept(deptid,deptname,deptoff,depthead) VALUES('E-104 ',' Sales','Sunday',' 104');
+		INSERT INTO empdept(deptid,deptname,deptoff,depthead) VALUES('E-105 ','Purchage',' Tuesday',' 104');
+
+		>insert data in empsalary table
+
+
+			INSERT INTO empsalary(empid,salary,ispermanent) VALUES(101,2000,'yes');
+			INSERT INTO empsalary(empid,salary,ispermanent) VALUES(102,10000,'yes');
+			INSERT INTO empsalary(empid,salary,ispermanent) VALUES(103,5000,'no');
+			INSERT INTO empsalary(empid,salary,ispermanent) VALUES(104,1900,'yes');
+			INSERT INTO empsalary(empid,salary,ispermanent) VALUES(105,2300,'yes');
+		
+
+	
+		>query 1: Select the detail of the employee whose name start with P
+		
+		>solution 1:
+				SELECT * FROM employee WHERE empname LIKE 'P%';	
+
+		>query 2:
+			 How many permanent candidate take salary more than 5000.		
+
+		>solution 2:
+
+			select count(salary) as count from empsalary where ispermanent='yes' and salary>5000;
+		
+
+
+		>query 3:Select the detail of employee whose emailed is in Gmail
+		
+		>solution 3:
+			SELECT * FROM employee WHERE emailid LIKE '%gmail%';
+		
+		>query 4:Select the details of the employee who work either for department E-104 or E-102.
+
+		>solution 4:
+			
+			method 1:(display detail of employee from only employee table)
+				SELECT * FROM employee WHERE employee.department='E-104' OR employee.department='E-102';
+						
+
+			method 2:(display employee details from employee and empdept table)
+					
+			SELECT * FROM employee,empdept WHERE (employee.department='E-104' OR employee.department='E-102') AND (empdept.deptid='E-102'OR empdept.deptid='E-104');
+
+		>query 5:
+			What is the department name for DeptID E-102?
+
+		>solution 5:
+			SELECT deptname FROM empdept WHERE deptid='E-102';	
+
+
+		>query 6: What is total salary that is paid to permanent employees?
+
+		>solution 6:
+			SELECT SUM(salary) AS sal FROM empsalary WHERE ispermanent='yes';
+
+
+
+		>query 7: List name of all employees whose name ends with a.
+
+		>solution 7:
+				SELECT * FROM employee WHERE empname LIKE '%a';
+
+
+
+			
+		>query 8: List the number of department of employees in each project.
+		>solution 8:
+			SELECT empid,projectid,COUNT(projectid) FROM empproject GROUP BY projectid;
+
+
+		>query 9:
+				How many project started in year 2010.
+		>solution 9:
+			>method 1:
+				SELECT COUNT(*) FROM empproject WHERE startyear='2010';
+
+			>method 2:
+				SELECT COUNT(projectid) AS projectin2010 FROM empproject WHERE startyear='2010';	
+
+		>query 10:
+			 How many project started and finished in the same year.
+		
+		>solution 10:
+			
+			>method 1:
+				SELECT COUNT(*) FROM empproject WHERE startyear=endyear;
+
+			>method 2:
+				SELECT COUNT(projectid) AS sameyearcompleted FROM empproject WHERE startyear=endyear;
+
+
+
+		>query 11:Select the name of the employee whose name's 3rd character is 'h'.
+
+		>solution 11:
+				SELECT * FROM employee WHERE empname LIKE '__h%';
+
+
+		>query 12:
+		        Select the department name of the company which is assigned to the employee whose employee id is 
+			grater 103.
+
+		>solution 12:
+		
+			method 1:			
+			   select deptname from empdept where deptid in (select department from employee where empid>103)	
+			method 2:
+				select deptname from empdept where deptid in (select department from employee where empid>=103)	
+
+		
+
+		>query 13:
+			 Select the name of the employee who is working under Abhishe
+		
+		>solution 13:
+			select empname from employee where empheadid =(select empid from employee where empname='Abhishek') 
+
+
+		>query 14:
+				 Select the name of the employee who is department head of HR
+
+		>solution 14:
+				select empname from employee where empid =(select depthead from empdept where deptname='hr') 
+					
+
+
+		>query 15:
+			Select the name of the employee head who is permanent.
+		
+		solution 15:
+			select empname from employee where empid in(select empid from empsalary where ispermanent='yes');
+
+
+		>query 16: Select the name and email of the Dept Head who is not Permanent.
+		>solution 16:
+			select empname,empid from employee where empid in(select empid from empsalary where ispermanent='no');
+	
+
+		>query 17:Select the employee whose department off is Monday			
+
+		>solution 17:
+			select * from employee where department in(select deptid from empdept where deptoff='monday');
+							
+
+		>query 18:
+				 select the Indian clients details.
+		
+		>solution 18:
+				
+			>method 1:
+				select * from clienttable where cid in(select cid from country where cname='india');
+			>method 2:
+				select * from clienttable where cid =(select cid from country where cname='india');
+			>method 3:
+				select * from clienttable where cid LIKE(select cid from country where cname='india');	
+			>method 4:
+				SELECT * FROM clienttable,country WHERE clienttable.cid=country.cid AND (country.cname='India');
+			>method 5:
+				SELECT * FROM clienttable   JOIN country ON clienttable.cid=country.cid AND country.cname='India';		
+
+
+		>query 19:
+			select the details of all employee working in development department			
+		
+		>solution 19:		
+			select * from employee where department in(select deptid from empdept where deptoff='monday');
+		
+				
+			
+		
+
+
+
+					
