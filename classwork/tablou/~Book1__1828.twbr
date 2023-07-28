@@ -6,6 +6,7 @@
     <_.fcp.AccessibleZoneTabOrder.true...AccessibleZoneTabOrder />
     <_.fcp.AnimationOnByDefault.true...AnimationOnByDefault />
     <AutoCreateAndUpdateDSDPhoneLayouts />
+    <MapboxVectorStylesAndLayers />
     <_.fcp.MarkAnimation.true...MarkAnimation />
     <_.fcp.ObjectModelEncapsulateLegacy.true...ObjectModelEncapsulateLegacy />
     <_.fcp.ObjectModelTableType.true...ObjectModelTableType />
@@ -566,6 +567,12 @@
         </metadata-records>
       </connection>
       <aliases enabled='yes' />
+      <column caption='costprice' datatype='real' name='[Calculation_128634116853579776]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='SUM([Sales])-SUM([Profit])' />
+      </column>
+      <column caption='profit ststus' datatype='string' name='[Calculation_128634116855738369]' role='measure' type='nominal'>
+        <calculation class='tableau' formula='IF SUM([Sales])&gt;= 45000 THEN&#13;&#10;&apos;high profit&apos;&#13;&#10;ELSEIF sum([Sales])&gt;30000 THEN&#13;&#10;&apos;medium profit&apos;&#13;&#10;ELSE&#13;&#10;&apos;no profit&apos;&#13;&#10;END' />
+      </column>
       <column datatype='string' name='[City]' role='dimension' semantic-role='[City].[Name]' type='nominal' />
       <column datatype='string' name='[Country]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
       <column aggregation='Sum' datatype='integer' default-format='*00000' name='[Postal Code]' role='dimension' semantic-role='[ZipCode].[Name]' type='ordinal' />
@@ -577,7 +584,8 @@
       <column-instance column='[Forecast Indicator]' derivation='None' forecast-column-base='[Forecast Indicator]' forecast-column-type='forecast-indicator' name='[none:Forecast Indicator:nk]' pivot='key' type='nominal' />
       <layout _.fcp.SchemaViewerObjectModel.false...dim-percentage='0.5' _.fcp.SchemaViewerObjectModel.false...measure-percentage='0.4' dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' />
       <semantic-values>
-        <semantic-value key='[Country].[Name]' value='&quot;India&quot;' />
+        <semantic-value key='[Country].[Name]' value='&quot;USA&quot;' />
+        <semantic-value key='[State].[Name]' value='%null%' />
       </semantic-values>
       <default-sorts>
         <manual-sort column='[none:Forecast Indicator:nk]' direction='ASC'>
@@ -587,6 +595,31 @@
           </dictionary>
         </manual-sort>
       </default-sorts>
+      <field-sort-info field-sort-order-type='custom-order'>
+        <field-sort-custom-order field='Row ID' />
+        <field-sort-custom-order field='Order ID' />
+        <field-sort-custom-order field='Order Date' />
+        <field-sort-custom-order field='Ship Date' />
+        <field-sort-custom-order field='Ship Mode' />
+        <field-sort-custom-order field='Customer ID' />
+        <field-sort-custom-order field='Customer Name' />
+        <field-sort-custom-order field='Segment' />
+        <field-sort-custom-order field='Country' />
+        <field-sort-custom-order field='City' />
+        <field-sort-custom-order field='State' />
+        <field-sort-custom-order field='Postal Code' />
+        <field-sort-custom-order field='Region' />
+        <field-sort-custom-order field='Product ID' />
+        <field-sort-custom-order field='Category' />
+        <field-sort-custom-order field='Sub-Category' />
+        <field-sort-custom-order field='Product Name' />
+        <field-sort-custom-order field='Sales' />
+        <field-sort-custom-order field='Calculation_128634116855738369' />
+        <field-sort-custom-order field='Calculation_128634116853579776' />
+        <field-sort-custom-order field='Quantity' />
+        <field-sort-custom-order field='Discount' />
+        <field-sort-custom-order field='Profit' />
+      </field-sort-info>
       <_.fcp.ObjectModelEncapsulateLegacy.true...object-graph>
         <objects>
           <object caption='Orders' id='Orders_3F640C792E484408885841186A84F250'>
@@ -659,710 +692,10 @@
         </relationships>
       </_.fcp.ObjectModelEncapsulateLegacy.true...object-graph>
     </datasource>
-    <datasource caption='Office City' inline='true' name='federated.0i0j29z0yt1rbs11bw5rj1ycnlfr' version='18.1'>
-      <connection class='federated'>
-        <named-connections>
-          <named-connection caption='Office City' name='textscan.1uo39aq1mi3xhk1h2in8h1b23f0z'>
-            <connection class='textscan' directory='C:/Users/Sony Vaio/Downloads' filename='Office City.csv' password='' server='' />
-          </named-connection>
-        </named-connections>
-        <_.fcp.ObjectModelEncapsulateLegacy.false...relation connection='textscan.1uo39aq1mi3xhk1h2in8h1b23f0z' name='Office City.csv' table='[Office City#csv]' type='table'>
-          <columns character-set='UTF-8' header='yes' locale='en_IN' separator=','>
-            <column datatype='string' name='City' ordinal='0' />
-            <column datatype='integer' name='Client ID' ordinal='1' />
-            <column datatype='string' name='Client Name' ordinal='2' />
-            <column datatype='integer' name='Number of Records' ordinal='3' />
-            <column datatype='integer' name='Order ID' ordinal='4' />
-            <column datatype='integer' name='Zip Code' ordinal='5' />
-            <column datatype='string' name='Goods Category' ordinal='6' />
-            <column datatype='string' name='Goods Name' ordinal='7' />
-            <column datatype='string' name='Goods Sub-Category' ordinal='8' />
-            <column datatype='real' name='Profit' ordinal='9' />
-            <column datatype='string' name='Region' ordinal='10' />
-            <column datatype='integer' name='Row ID' ordinal='11' />
-            <column datatype='real' name='Office City Sales' ordinal='12' />
-            <column datatype='string' name='State' ordinal='13' />
-          </columns>
-        </_.fcp.ObjectModelEncapsulateLegacy.false...relation>
-        <_.fcp.ObjectModelEncapsulateLegacy.true...relation connection='textscan.1uo39aq1mi3xhk1h2in8h1b23f0z' name='Office City.csv' table='[Office City#csv]' type='table'>
-          <columns character-set='UTF-8' header='yes' locale='en_IN' separator=','>
-            <column datatype='string' name='City' ordinal='0' />
-            <column datatype='integer' name='Client ID' ordinal='1' />
-            <column datatype='string' name='Client Name' ordinal='2' />
-            <column datatype='integer' name='Number of Records' ordinal='3' />
-            <column datatype='integer' name='Order ID' ordinal='4' />
-            <column datatype='integer' name='Zip Code' ordinal='5' />
-            <column datatype='string' name='Goods Category' ordinal='6' />
-            <column datatype='string' name='Goods Name' ordinal='7' />
-            <column datatype='string' name='Goods Sub-Category' ordinal='8' />
-            <column datatype='real' name='Profit' ordinal='9' />
-            <column datatype='string' name='Region' ordinal='10' />
-            <column datatype='integer' name='Row ID' ordinal='11' />
-            <column datatype='real' name='Office City Sales' ordinal='12' />
-            <column datatype='string' name='State' ordinal='13' />
-          </columns>
-        </_.fcp.ObjectModelEncapsulateLegacy.true...relation>
-        <metadata-records>
-          <metadata-record class='capability'>
-            <remote-name />
-            <remote-type>0</remote-type>
-            <parent-name>[Office City.csv]</parent-name>
-            <remote-alias />
-            <aggregation>Count</aggregation>
-            <contains-null>true</contains-null>
-            <attributes>
-              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
-              <attribute datatype='string' name='collation'>&quot;en_GB&quot;</attribute>
-              <attribute datatype='string' name='currency'>&quot;₹&quot;</attribute>
-              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
-              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
-              <attribute datatype='string' name='locale'>&quot;en_IN&quot;</attribute>
-              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
-            </attributes>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>City</remote-name>
-            <remote-type>129</remote-type>
-            <local-name>[City]</local-name>
-            <parent-name>[Office City.csv]</parent-name>
-            <remote-alias>City</remote-alias>
-            <ordinal>0</ordinal>
-            <local-type>string</local-type>
-            <aggregation>Count</aggregation>
-            <scale>1</scale>
-            <width>1073741823</width>
-            <contains-null>true</contains-null>
-            <collation flag='0' name='LEN_RGB' />
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Office City.csv_415757CB3D6E4F7CA614CAB3AAAE838C]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Client ID</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[Client ID]</local-name>
-            <parent-name>[Office City.csv]</parent-name>
-            <remote-alias>Client ID</remote-alias>
-            <ordinal>1</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Office City.csv_415757CB3D6E4F7CA614CAB3AAAE838C]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Client Name</remote-name>
-            <remote-type>129</remote-type>
-            <local-name>[Client Name]</local-name>
-            <parent-name>[Office City.csv]</parent-name>
-            <remote-alias>Client Name</remote-alias>
-            <ordinal>2</ordinal>
-            <local-type>string</local-type>
-            <aggregation>Count</aggregation>
-            <scale>1</scale>
-            <width>1073741823</width>
-            <contains-null>true</contains-null>
-            <collation flag='0' name='LEN_RGB' />
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Office City.csv_415757CB3D6E4F7CA614CAB3AAAE838C]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Number of Records</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[Number of Records]</local-name>
-            <parent-name>[Office City.csv]</parent-name>
-            <remote-alias>Number of Records</remote-alias>
-            <ordinal>3</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Office City.csv_415757CB3D6E4F7CA614CAB3AAAE838C]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Order ID</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[Order ID]</local-name>
-            <parent-name>[Office City.csv]</parent-name>
-            <remote-alias>Order ID</remote-alias>
-            <ordinal>4</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Office City.csv_415757CB3D6E4F7CA614CAB3AAAE838C]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Zip Code</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[Zip Code]</local-name>
-            <parent-name>[Office City.csv]</parent-name>
-            <remote-alias>Zip Code</remote-alias>
-            <ordinal>5</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Office City.csv_415757CB3D6E4F7CA614CAB3AAAE838C]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Goods Category</remote-name>
-            <remote-type>129</remote-type>
-            <local-name>[Goods Category]</local-name>
-            <parent-name>[Office City.csv]</parent-name>
-            <remote-alias>Goods Category</remote-alias>
-            <ordinal>6</ordinal>
-            <local-type>string</local-type>
-            <aggregation>Count</aggregation>
-            <scale>1</scale>
-            <width>1073741823</width>
-            <contains-null>true</contains-null>
-            <collation flag='0' name='LEN_RGB' />
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Office City.csv_415757CB3D6E4F7CA614CAB3AAAE838C]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Goods Name</remote-name>
-            <remote-type>129</remote-type>
-            <local-name>[Goods Name]</local-name>
-            <parent-name>[Office City.csv]</parent-name>
-            <remote-alias>Goods Name</remote-alias>
-            <ordinal>7</ordinal>
-            <local-type>string</local-type>
-            <aggregation>Count</aggregation>
-            <scale>1</scale>
-            <width>1073741823</width>
-            <contains-null>true</contains-null>
-            <collation flag='0' name='LEN_RGB' />
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Office City.csv_415757CB3D6E4F7CA614CAB3AAAE838C]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Goods Sub-Category</remote-name>
-            <remote-type>129</remote-type>
-            <local-name>[Goods Sub-Category]</local-name>
-            <parent-name>[Office City.csv]</parent-name>
-            <remote-alias>Goods Sub-Category</remote-alias>
-            <ordinal>8</ordinal>
-            <local-type>string</local-type>
-            <aggregation>Count</aggregation>
-            <scale>1</scale>
-            <width>1073741823</width>
-            <contains-null>true</contains-null>
-            <collation flag='0' name='LEN_RGB' />
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Office City.csv_415757CB3D6E4F7CA614CAB3AAAE838C]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Profit</remote-name>
-            <remote-type>5</remote-type>
-            <local-name>[Profit]</local-name>
-            <parent-name>[Office City.csv]</parent-name>
-            <remote-alias>Profit</remote-alias>
-            <ordinal>9</ordinal>
-            <local-type>real</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Office City.csv_415757CB3D6E4F7CA614CAB3AAAE838C]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Region</remote-name>
-            <remote-type>129</remote-type>
-            <local-name>[Region]</local-name>
-            <parent-name>[Office City.csv]</parent-name>
-            <remote-alias>Region</remote-alias>
-            <ordinal>10</ordinal>
-            <local-type>string</local-type>
-            <aggregation>Count</aggregation>
-            <scale>1</scale>
-            <width>1073741823</width>
-            <contains-null>true</contains-null>
-            <collation flag='0' name='LEN_RGB' />
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Office City.csv_415757CB3D6E4F7CA614CAB3AAAE838C]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Row ID</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[Row ID]</local-name>
-            <parent-name>[Office City.csv]</parent-name>
-            <remote-alias>Row ID</remote-alias>
-            <ordinal>11</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Office City.csv_415757CB3D6E4F7CA614CAB3AAAE838C]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Office City Sales</remote-name>
-            <remote-type>5</remote-type>
-            <local-name>[Office City Sales]</local-name>
-            <parent-name>[Office City.csv]</parent-name>
-            <remote-alias>Office City Sales</remote-alias>
-            <ordinal>12</ordinal>
-            <local-type>real</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Office City.csv_415757CB3D6E4F7CA614CAB3AAAE838C]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>State</remote-name>
-            <remote-type>129</remote-type>
-            <local-name>[State]</local-name>
-            <parent-name>[Office City.csv]</parent-name>
-            <remote-alias>State</remote-alias>
-            <ordinal>13</ordinal>
-            <local-type>string</local-type>
-            <aggregation>Count</aggregation>
-            <scale>1</scale>
-            <width>1073741823</width>
-            <contains-null>true</contains-null>
-            <collation flag='0' name='LEN_RGB' />
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Office City.csv_415757CB3D6E4F7CA614CAB3AAAE838C]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-          </metadata-record>
-        </metadata-records>
-      </connection>
-      <aliases enabled='yes' />
-      <column datatype='string' name='[City]' role='dimension' semantic-role='[City].[Name]' type='nominal' />
-      <column datatype='integer' name='[Client ID]' role='dimension' type='ordinal' />
-      <column datatype='integer' name='[Order ID]' role='dimension' type='ordinal' />
-      <column datatype='integer' name='[Row ID]' role='dimension' type='ordinal' />
-      <column datatype='string' name='[State]' role='dimension' semantic-role='[State].[Name]' type='nominal' />
-      <column aggregation='Sum' datatype='integer' default-format='*00000' name='[Zip Code]' role='dimension' semantic-role='[ZipCode].[Name]' type='ordinal' />
-      <_.fcp.ObjectModelTableType.true...column caption='Office City.csv' datatype='table' name='[__tableau_internal_object_id__].[Office City.csv_415757CB3D6E4F7CA614CAB3AAAE838C]' role='measure' type='quantitative' />
-      <layout _.fcp.SchemaViewerObjectModel.false...dim-percentage='0.5' _.fcp.SchemaViewerObjectModel.false...measure-percentage='0.4' dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' />
-      <semantic-values>
-        <semantic-value key='[Country].[Name]' value='&quot;India&quot;' />
-      </semantic-values>
-      <_.fcp.ObjectModelEncapsulateLegacy.true...object-graph>
-        <objects>
-          <object caption='Office City.csv' id='Office City.csv_415757CB3D6E4F7CA614CAB3AAAE838C'>
-            <properties context=''>
-              <relation connection='textscan.1uo39aq1mi3xhk1h2in8h1b23f0z' name='Office City.csv' table='[Office City#csv]' type='table'>
-                <columns character-set='UTF-8' header='yes' locale='en_IN' separator=','>
-                  <column datatype='string' name='City' ordinal='0' />
-                  <column datatype='integer' name='Client ID' ordinal='1' />
-                  <column datatype='string' name='Client Name' ordinal='2' />
-                  <column datatype='integer' name='Number of Records' ordinal='3' />
-                  <column datatype='integer' name='Order ID' ordinal='4' />
-                  <column datatype='integer' name='Zip Code' ordinal='5' />
-                  <column datatype='string' name='Goods Category' ordinal='6' />
-                  <column datatype='string' name='Goods Name' ordinal='7' />
-                  <column datatype='string' name='Goods Sub-Category' ordinal='8' />
-                  <column datatype='real' name='Profit' ordinal='9' />
-                  <column datatype='string' name='Region' ordinal='10' />
-                  <column datatype='integer' name='Row ID' ordinal='11' />
-                  <column datatype='real' name='Office City Sales' ordinal='12' />
-                  <column datatype='string' name='State' ordinal='13' />
-                </columns>
-              </relation>
-            </properties>
-          </object>
-        </objects>
-      </_.fcp.ObjectModelEncapsulateLegacy.true...object-graph>
-    </datasource>
-    <datasource caption='Coffee' inline='true' name='federated.10zekwd1nr93pp1bwie471bazc9e' version='18.1'>
-      <connection class='federated'>
-        <named-connections>
-          <named-connection caption='Coffee' name='textscan.0m9jn3g0xh3ex91d4476z0kya39x'>
-            <connection class='textscan' directory='C:/Users/Sony Vaio/Downloads' filename='Coffee.csv' password='' server='' />
-          </named-connection>
-        </named-connections>
-        <_.fcp.ObjectModelEncapsulateLegacy.false...relation connection='textscan.0m9jn3g0xh3ex91d4476z0kya39x' name='Coffee.csv' table='[Coffee#csv]' type='table'>
-          <columns character-set='UTF-8' header='yes' locale='en_IN' separator=','>
-            <column datatype='integer' name='Area Code' ordinal='0' />
-            <column datatype='integer' name='Date' ordinal='1' />
-            <column datatype='string' name='Market' ordinal='2' />
-            <column datatype='string' name='Market Size' ordinal='3' />
-            <column datatype='string' name='Product' ordinal='4' />
-            <column datatype='string' name='Product Line' ordinal='5' />
-            <column datatype='string' name='Product Type' ordinal='6' />
-            <column datatype='string' name='State' ordinal='7' />
-            <column datatype='string' name='Type' ordinal='8' />
-            <column datatype='integer' name='Budget COGS' ordinal='9' />
-            <column datatype='integer' name='Budget Margin' ordinal='10' />
-            <column datatype='integer' name='Budget Profit' ordinal='11' />
-            <column datatype='integer' name='Budget Sales' ordinal='12' />
-            <column datatype='integer' name='COGS' ordinal='13' />
-            <column datatype='integer' name='Inventory' ordinal='14' />
-            <column datatype='integer' name='Margin' ordinal='15' />
-            <column datatype='integer' name='Marketing' ordinal='16' />
-            <column datatype='integer' name='Profit' ordinal='17' />
-            <column datatype='integer' name='Sales' ordinal='18' />
-            <column datatype='integer' name='Total Expenses' ordinal='19' />
-          </columns>
-        </_.fcp.ObjectModelEncapsulateLegacy.false...relation>
-        <_.fcp.ObjectModelEncapsulateLegacy.true...relation connection='textscan.0m9jn3g0xh3ex91d4476z0kya39x' name='Coffee.csv' table='[Coffee#csv]' type='table'>
-          <columns character-set='UTF-8' header='yes' locale='en_IN' separator=','>
-            <column datatype='integer' name='Area Code' ordinal='0' />
-            <column datatype='integer' name='Date' ordinal='1' />
-            <column datatype='string' name='Market' ordinal='2' />
-            <column datatype='string' name='Market Size' ordinal='3' />
-            <column datatype='string' name='Product' ordinal='4' />
-            <column datatype='string' name='Product Line' ordinal='5' />
-            <column datatype='string' name='Product Type' ordinal='6' />
-            <column datatype='string' name='State' ordinal='7' />
-            <column datatype='string' name='Type' ordinal='8' />
-            <column datatype='integer' name='Budget COGS' ordinal='9' />
-            <column datatype='integer' name='Budget Margin' ordinal='10' />
-            <column datatype='integer' name='Budget Profit' ordinal='11' />
-            <column datatype='integer' name='Budget Sales' ordinal='12' />
-            <column datatype='integer' name='COGS' ordinal='13' />
-            <column datatype='integer' name='Inventory' ordinal='14' />
-            <column datatype='integer' name='Margin' ordinal='15' />
-            <column datatype='integer' name='Marketing' ordinal='16' />
-            <column datatype='integer' name='Profit' ordinal='17' />
-            <column datatype='integer' name='Sales' ordinal='18' />
-            <column datatype='integer' name='Total Expenses' ordinal='19' />
-          </columns>
-        </_.fcp.ObjectModelEncapsulateLegacy.true...relation>
-        <metadata-records>
-          <metadata-record class='capability'>
-            <remote-name />
-            <remote-type>0</remote-type>
-            <parent-name>[Coffee.csv]</parent-name>
-            <remote-alias />
-            <aggregation>Count</aggregation>
-            <contains-null>true</contains-null>
-            <attributes>
-              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
-              <attribute datatype='string' name='collation'>&quot;en_GB&quot;</attribute>
-              <attribute datatype='string' name='currency'>&quot;₹&quot;</attribute>
-              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
-              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
-              <attribute datatype='string' name='locale'>&quot;en_IN&quot;</attribute>
-              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
-            </attributes>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Area Code</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[Area Code]</local-name>
-            <parent-name>[Coffee.csv]</parent-name>
-            <remote-alias>Area Code</remote-alias>
-            <ordinal>0</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Coffee.csv_6B29FA3DE9C2490DB8DD8F326D981ADD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Date</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[Date]</local-name>
-            <parent-name>[Coffee.csv]</parent-name>
-            <remote-alias>Date</remote-alias>
-            <ordinal>1</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Coffee.csv_6B29FA3DE9C2490DB8DD8F326D981ADD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Market</remote-name>
-            <remote-type>129</remote-type>
-            <local-name>[Market]</local-name>
-            <parent-name>[Coffee.csv]</parent-name>
-            <remote-alias>Market</remote-alias>
-            <ordinal>2</ordinal>
-            <local-type>string</local-type>
-            <aggregation>Count</aggregation>
-            <scale>1</scale>
-            <width>1073741823</width>
-            <contains-null>true</contains-null>
-            <collation flag='0' name='LEN_RGB' />
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Coffee.csv_6B29FA3DE9C2490DB8DD8F326D981ADD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Market Size</remote-name>
-            <remote-type>129</remote-type>
-            <local-name>[Market Size]</local-name>
-            <parent-name>[Coffee.csv]</parent-name>
-            <remote-alias>Market Size</remote-alias>
-            <ordinal>3</ordinal>
-            <local-type>string</local-type>
-            <aggregation>Count</aggregation>
-            <scale>1</scale>
-            <width>1073741823</width>
-            <contains-null>true</contains-null>
-            <collation flag='0' name='LEN_RGB' />
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Coffee.csv_6B29FA3DE9C2490DB8DD8F326D981ADD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Product</remote-name>
-            <remote-type>129</remote-type>
-            <local-name>[Product]</local-name>
-            <parent-name>[Coffee.csv]</parent-name>
-            <remote-alias>Product</remote-alias>
-            <ordinal>4</ordinal>
-            <local-type>string</local-type>
-            <aggregation>Count</aggregation>
-            <scale>1</scale>
-            <width>1073741823</width>
-            <contains-null>true</contains-null>
-            <collation flag='0' name='LEN_RGB' />
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Coffee.csv_6B29FA3DE9C2490DB8DD8F326D981ADD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Product Line</remote-name>
-            <remote-type>129</remote-type>
-            <local-name>[Product Line]</local-name>
-            <parent-name>[Coffee.csv]</parent-name>
-            <remote-alias>Product Line</remote-alias>
-            <ordinal>5</ordinal>
-            <local-type>string</local-type>
-            <aggregation>Count</aggregation>
-            <scale>1</scale>
-            <width>1073741823</width>
-            <contains-null>true</contains-null>
-            <collation flag='0' name='LEN_RGB' />
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Coffee.csv_6B29FA3DE9C2490DB8DD8F326D981ADD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Product Type</remote-name>
-            <remote-type>129</remote-type>
-            <local-name>[Product Type]</local-name>
-            <parent-name>[Coffee.csv]</parent-name>
-            <remote-alias>Product Type</remote-alias>
-            <ordinal>6</ordinal>
-            <local-type>string</local-type>
-            <aggregation>Count</aggregation>
-            <scale>1</scale>
-            <width>1073741823</width>
-            <contains-null>true</contains-null>
-            <collation flag='0' name='LEN_RGB' />
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Coffee.csv_6B29FA3DE9C2490DB8DD8F326D981ADD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>State</remote-name>
-            <remote-type>129</remote-type>
-            <local-name>[State]</local-name>
-            <parent-name>[Coffee.csv]</parent-name>
-            <remote-alias>State</remote-alias>
-            <ordinal>7</ordinal>
-            <local-type>string</local-type>
-            <aggregation>Count</aggregation>
-            <scale>1</scale>
-            <width>1073741823</width>
-            <contains-null>true</contains-null>
-            <collation flag='0' name='LEN_RGB' />
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Coffee.csv_6B29FA3DE9C2490DB8DD8F326D981ADD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Type</remote-name>
-            <remote-type>129</remote-type>
-            <local-name>[Type]</local-name>
-            <parent-name>[Coffee.csv]</parent-name>
-            <remote-alias>Type</remote-alias>
-            <ordinal>8</ordinal>
-            <local-type>string</local-type>
-            <aggregation>Count</aggregation>
-            <scale>1</scale>
-            <width>1073741823</width>
-            <contains-null>true</contains-null>
-            <collation flag='0' name='LEN_RGB' />
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Coffee.csv_6B29FA3DE9C2490DB8DD8F326D981ADD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Budget COGS</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[Budget COGS]</local-name>
-            <parent-name>[Coffee.csv]</parent-name>
-            <remote-alias>Budget COGS</remote-alias>
-            <ordinal>9</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Coffee.csv_6B29FA3DE9C2490DB8DD8F326D981ADD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Budget Margin</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[Budget Margin]</local-name>
-            <parent-name>[Coffee.csv]</parent-name>
-            <remote-alias>Budget Margin</remote-alias>
-            <ordinal>10</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Coffee.csv_6B29FA3DE9C2490DB8DD8F326D981ADD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Budget Profit</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[Budget Profit]</local-name>
-            <parent-name>[Coffee.csv]</parent-name>
-            <remote-alias>Budget Profit</remote-alias>
-            <ordinal>11</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Coffee.csv_6B29FA3DE9C2490DB8DD8F326D981ADD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Budget Sales</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[Budget Sales]</local-name>
-            <parent-name>[Coffee.csv]</parent-name>
-            <remote-alias>Budget Sales</remote-alias>
-            <ordinal>12</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Coffee.csv_6B29FA3DE9C2490DB8DD8F326D981ADD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>COGS</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[COGS]</local-name>
-            <parent-name>[Coffee.csv]</parent-name>
-            <remote-alias>COGS</remote-alias>
-            <ordinal>13</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Coffee.csv_6B29FA3DE9C2490DB8DD8F326D981ADD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Inventory</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[Inventory]</local-name>
-            <parent-name>[Coffee.csv]</parent-name>
-            <remote-alias>Inventory</remote-alias>
-            <ordinal>14</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Coffee.csv_6B29FA3DE9C2490DB8DD8F326D981ADD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Margin</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[Margin]</local-name>
-            <parent-name>[Coffee.csv]</parent-name>
-            <remote-alias>Margin</remote-alias>
-            <ordinal>15</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Coffee.csv_6B29FA3DE9C2490DB8DD8F326D981ADD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Marketing</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[Marketing]</local-name>
-            <parent-name>[Coffee.csv]</parent-name>
-            <remote-alias>Marketing</remote-alias>
-            <ordinal>16</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Coffee.csv_6B29FA3DE9C2490DB8DD8F326D981ADD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Profit</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[Profit]</local-name>
-            <parent-name>[Coffee.csv]</parent-name>
-            <remote-alias>Profit</remote-alias>
-            <ordinal>17</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Coffee.csv_6B29FA3DE9C2490DB8DD8F326D981ADD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Sales</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[Sales]</local-name>
-            <parent-name>[Coffee.csv]</parent-name>
-            <remote-alias>Sales</remote-alias>
-            <ordinal>18</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Coffee.csv_6B29FA3DE9C2490DB8DD8F326D981ADD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Total Expenses</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[Total Expenses]</local-name>
-            <parent-name>[Coffee.csv]</parent-name>
-            <remote-alias>Total Expenses</remote-alias>
-            <ordinal>19</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Coffee.csv_6B29FA3DE9C2490DB8DD8F326D981ADD]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
-          </metadata-record>
-        </metadata-records>
-      </connection>
-      <aliases enabled='yes' />
-      <column aggregation='Sum' datatype='integer' default-format='*000' name='[Area Code]' role='dimension' semantic-role='[AreaCode].[Name]' type='ordinal' />
-      <column caption='Cogs' datatype='integer' name='[COGS]' role='measure' type='quantitative' />
-      <column caption='Totalsales' datatype='real' name='[Calculation_409264668296503296]' role='measure' type='quantitative'>
-        <calculation class='tableau' formula='SUM([Sales])+SUM([federated.0i0j29z0yt1rbs11bw5rj1ycnlfr].[Office City Sales])' />
-      </column>
-      <column datatype='string' name='[State]' role='dimension' semantic-role='[State].[Name]' type='nominal' />
-      <_.fcp.ObjectModelTableType.true...column caption='Coffee.csv' datatype='table' name='[__tableau_internal_object_id__].[Coffee.csv_6B29FA3DE9C2490DB8DD8F326D981ADD]' role='measure' type='quantitative' />
-      <layout _.fcp.SchemaViewerObjectModel.false...dim-percentage='0.5' _.fcp.SchemaViewerObjectModel.false...measure-percentage='0.4' dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' />
-      <semantic-values>
-        <semantic-value key='[Country].[Name]' value='&quot;India&quot;' />
-      </semantic-values>
-      <field-sort-info field-sort-order-type='custom-order'>
-        <field-sort-custom-order field='Area Code' />
-        <field-sort-custom-order field='Date' />
-        <field-sort-custom-order field='Market' />
-        <field-sort-custom-order field='Market Size' />
-        <field-sort-custom-order field='Product' />
-        <field-sort-custom-order field='Product Line' />
-        <field-sort-custom-order field='Product Type' />
-        <field-sort-custom-order field='State' />
-        <field-sort-custom-order field='Type' />
-        <field-sort-custom-order field='Budget COGS' />
-        <field-sort-custom-order field='Budget Margin' />
-        <field-sort-custom-order field='Budget Profit' />
-        <field-sort-custom-order field='Budget Sales' />
-        <field-sort-custom-order field='COGS' />
-        <field-sort-custom-order field='Inventory' />
-        <field-sort-custom-order field='Margin' />
-        <field-sort-custom-order field='Marketing' />
-        <field-sort-custom-order field='Profit' />
-        <field-sort-custom-order field='Sales' />
-        <field-sort-custom-order field='Calculation_409264668296503296' />
-        <field-sort-custom-order field='Total Expenses' />
-        <field-sort-custom-order field='Geometry (generated)' />
-        <field-sort-custom-order field='Latitude (generated)' />
-        <field-sort-custom-order field='Longitude (generated)' />
-        <field-sort-custom-order field=':Measure Names' />
-        <field-sort-custom-order field='Multiple Values' />
-      </field-sort-info>
-      <datasource-dependencies datasource='federated.0i0j29z0yt1rbs11bw5rj1ycnlfr'>
-        <column datatype='real' name='[Office City Sales]' role='measure' type='quantitative' />
-      </datasource-dependencies>
-      <_.fcp.ObjectModelEncapsulateLegacy.true...object-graph>
-        <objects>
-          <object caption='Coffee.csv' id='Coffee.csv_6B29FA3DE9C2490DB8DD8F326D981ADD'>
-            <properties context=''>
-              <relation connection='textscan.0m9jn3g0xh3ex91d4476z0kya39x' name='Coffee.csv' table='[Coffee#csv]' type='table'>
-                <columns character-set='UTF-8' header='yes' locale='en_IN' separator=','>
-                  <column datatype='integer' name='Area Code' ordinal='0' />
-                  <column datatype='integer' name='Date' ordinal='1' />
-                  <column datatype='string' name='Market' ordinal='2' />
-                  <column datatype='string' name='Market Size' ordinal='3' />
-                  <column datatype='string' name='Product' ordinal='4' />
-                  <column datatype='string' name='Product Line' ordinal='5' />
-                  <column datatype='string' name='Product Type' ordinal='6' />
-                  <column datatype='string' name='State' ordinal='7' />
-                  <column datatype='string' name='Type' ordinal='8' />
-                  <column datatype='integer' name='Budget COGS' ordinal='9' />
-                  <column datatype='integer' name='Budget Margin' ordinal='10' />
-                  <column datatype='integer' name='Budget Profit' ordinal='11' />
-                  <column datatype='integer' name='Budget Sales' ordinal='12' />
-                  <column datatype='integer' name='COGS' ordinal='13' />
-                  <column datatype='integer' name='Inventory' ordinal='14' />
-                  <column datatype='integer' name='Margin' ordinal='15' />
-                  <column datatype='integer' name='Marketing' ordinal='16' />
-                  <column datatype='integer' name='Profit' ordinal='17' />
-                  <column datatype='integer' name='Sales' ordinal='18' />
-                  <column datatype='integer' name='Total Expenses' ordinal='19' />
-                </columns>
-              </relation>
-            </properties>
-          </object>
-        </objects>
-      </_.fcp.ObjectModelEncapsulateLegacy.true...object-graph>
-    </datasource>
   </datasources>
+  <mapsources>
+    <mapsource name='Tableau' />
+  </mapsources>
   <worksheets>
     <worksheet name='Sheet 1'>
       <table>
@@ -1624,7 +957,32 @@
     <worksheet name='Sheet 7'>
       <table>
         <view>
-          <datasources />
+          <datasources>
+            <datasource caption='Orders+ (Sample - Superstore)' name='federated.0v8qjr91w7pqpm195b1br1bn8d6c' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0v8qjr91w7pqpm195b1br1bn8d6c'>
+            <column datatype='string' name='[Category]' role='dimension' type='nominal' />
+            <column datatype='real' name='[Sales]' role='measure' type='quantitative' />
+            <column datatype='string' name='[Sub-Category]' role='dimension' type='nominal' />
+            <column-instance column='[Category]' derivation='None' name='[none:Category:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Sub-Category]' derivation='None' name='[none:Sub-Category:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Sales]' derivation='Sum' name='[sum:Sales:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.0v8qjr91w7pqpm195b1br1bn8d6c].[none:Category:nk]'>
+            <groupfilter function='member' level='[none:Category:nk]' member='&quot;Furniture&quot;' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.0v8qjr91w7pqpm195b1br1bn8d6c].[none:Sub-Category:nk]'>
+            <groupfilter function='union' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate'>
+              <groupfilter function='member' level='[none:Sub-Category:nk]' member='&quot;Bookcases&quot;' />
+              <groupfilter function='member' level='[none:Sub-Category:nk]' member='&quot;Chairs&quot;' />
+              <groupfilter function='member' level='[none:Sub-Category:nk]' member='&quot;Furnishings&quot;' />
+              <groupfilter function='member' level='[none:Sub-Category:nk]' member='&quot;Tables&quot;' />
+            </groupfilter>
+          </filter>
+          <slices>
+            <column>[federated.0v8qjr91w7pqpm195b1br1bn8d6c].[none:Category:nk]</column>
+            <column>[federated.0v8qjr91w7pqpm195b1br1bn8d6c].[none:Sub-Category:nk]</column>
+          </slices>
           <aggregation value='true' />
         </view>
         <style />
@@ -1636,87 +994,65 @@
             <mark class='Automatic' />
           </pane>
         </panes>
-        <rows />
-        <cols />
+        <rows>([federated.0v8qjr91w7pqpm195b1br1bn8d6c].[none:Category:nk] / [federated.0v8qjr91w7pqpm195b1br1bn8d6c].[none:Sub-Category:nk])</rows>
+        <cols>[federated.0v8qjr91w7pqpm195b1br1bn8d6c].[sum:Sales:qk]</cols>
       </table>
-      <simple-id uuid='{B175474D-5F45-449C-9628-7C86F3930204}' />
+      <simple-id uuid='{D57D28EF-342B-4BDD-811F-B1BE2823B9DF}' />
     </worksheet>
     <worksheet name='Sheet 8'>
       <table>
         <view>
           <datasources>
-            <datasource caption='Coffee' name='federated.10zekwd1nr93pp1bwie471bazc9e' />
-            <datasource caption='Office City' name='federated.0i0j29z0yt1rbs11bw5rj1ycnlfr' />
+            <datasource caption='Orders+ (Sample - Superstore)' name='federated.0v8qjr91w7pqpm195b1br1bn8d6c' />
           </datasources>
-          <datasource-dependencies datasource='federated.0i0j29z0yt1rbs11bw5rj1ycnlfr'>
-            <column datatype='real' name='[Office City Sales]' role='measure' type='quantitative' />
-            <column-instance column='[Office City Sales]' derivation='Sum' name='[sum:Office City Sales:qk]' pivot='key' type='quantitative' />
-          </datasource-dependencies>
-          <datasource-dependencies datasource='federated.10zekwd1nr93pp1bwie471bazc9e'>
-            <column caption='Totalsales' datatype='real' name='[Calculation_409264668296503296]' role='measure' type='quantitative'>
-              <calculation class='tableau' formula='SUM([Sales])+SUM([federated.0i0j29z0yt1rbs11bw5rj1ycnlfr].[Office City Sales])' />
+          <datasource-dependencies datasource='federated.0v8qjr91w7pqpm195b1br1bn8d6c'>
+            <column caption='costprice' datatype='real' name='[Calculation_128634116853579776]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='SUM([Sales])-SUM([Profit])' />
             </column>
-            <column datatype='integer' name='[Sales]' role='measure' type='quantitative' />
-            <column datatype='string' name='[State]' role='dimension' semantic-role='[State].[Name]' type='nominal' />
-            <column-instance column='[State]' derivation='None' name='[none:State:nk]' pivot='key' type='nominal' />
-            <column-instance column='[Sales]' derivation='Sum' name='[sum:Sales:qk]' pivot='key' type='quantitative' />
-            <column-instance column='[Calculation_409264668296503296]' derivation='User' name='[usr:Calculation_409264668296503296:qk]' pivot='key' type='quantitative' />
-          </datasource-dependencies>
-          <aggregation value='true' />
-        </view>
-        <style />
-        <panes>
-          <pane selection-relaxation-option='selection-relaxation-allow'>
-            <view>
-              <breakdown value='auto' />
-            </view>
-            <mark class='Automatic' />
-          </pane>
-          <pane id='1' selection-relaxation-option='selection-relaxation-allow' x-axis-name='[federated.10zekwd1nr93pp1bwie471bazc9e].[sum:Sales:qk]'>
-            <view>
-              <breakdown value='auto' />
-            </view>
-            <mark class='Automatic' />
-          </pane>
-          <pane id='2' selection-relaxation-option='selection-relaxation-allow' x-axis-name='[federated.0i0j29z0yt1rbs11bw5rj1ycnlfr].[sum:Office City Sales:qk]'>
-            <view>
-              <breakdown value='auto' />
-            </view>
-            <mark class='Automatic' />
-          </pane>
-          <pane id='3' selection-relaxation-option='selection-relaxation-allow' x-axis-name='[federated.10zekwd1nr93pp1bwie471bazc9e].[usr:Calculation_409264668296503296:qk]'>
-            <view>
-              <breakdown value='auto' />
-            </view>
-            <mark class='Automatic' />
-          </pane>
-        </panes>
-        <rows>[federated.10zekwd1nr93pp1bwie471bazc9e].[none:State:nk]</rows>
-        <cols>([federated.10zekwd1nr93pp1bwie471bazc9e].[sum:Sales:qk] + ([federated.0i0j29z0yt1rbs11bw5rj1ycnlfr].[sum:Office City Sales:qk] + [federated.10zekwd1nr93pp1bwie471bazc9e].[usr:Calculation_409264668296503296:qk]))</cols>
-      </table>
-      <simple-id uuid='{6830265C-B7B4-43CA-BCE8-DF38DAD7AC69}' />
-    </worksheet>
-    <worksheet name='Sheet 9'>
-      <table>
-        <view>
-          <datasources>
-            <datasource caption='Coffee' name='federated.10zekwd1nr93pp1bwie471bazc9e' />
-            <datasource caption='Office City' name='federated.0i0j29z0yt1rbs11bw5rj1ycnlfr' />
-          </datasources>
-          <datasource-dependencies datasource='federated.0i0j29z0yt1rbs11bw5rj1ycnlfr'>
-            <column datatype='real' name='[Office City Sales]' role='measure' type='quantitative' />
-            <column-instance column='[Office City Sales]' derivation='Sum' name='[sum:Office City Sales:qk]' pivot='key' type='quantitative' />
-          </datasource-dependencies>
-          <datasource-dependencies datasource='federated.10zekwd1nr93pp1bwie471bazc9e'>
-            <column caption='Totalsales' datatype='real' name='[Calculation_409264668296503296]' role='measure' type='quantitative'>
-              <calculation class='tableau' formula='SUM([Sales])+SUM([federated.0i0j29z0yt1rbs11bw5rj1ycnlfr].[Office City Sales])' />
+            <column caption='profit ststus' datatype='string' name='[Calculation_128634116855738369]' role='measure' type='nominal'>
+              <calculation class='tableau' formula='IF SUM([Sales])&gt;= 45000 THEN&#13;&#10;&apos;high profit&apos;&#13;&#10;ELSEIF sum([Sales])&gt;30000 THEN&#13;&#10;&apos;medium profit&apos;&#13;&#10;ELSE&#13;&#10;&apos;no profit&apos;&#13;&#10;END' />
             </column>
-            <column datatype='integer' name='[Sales]' role='measure' type='quantitative' />
-            <column datatype='string' name='[State]' role='dimension' semantic-role='[State].[Name]' type='nominal' />
-            <column-instance column='[State]' derivation='None' name='[none:State:nk]' pivot='key' type='nominal' />
+            <column datatype='real' name='[Profit]' role='measure' type='quantitative' />
+            <column datatype='real' name='[Sales]' role='measure' type='quantitative' />
+            <column datatype='string' name='[Sub-Category]' role='dimension' type='nominal' />
+            <column-instance column='[Sub-Category]' derivation='None' name='[none:Sub-Category:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Profit]' derivation='Sum' name='[sum:Profit:qk]' pivot='key' type='quantitative' />
             <column-instance column='[Sales]' derivation='Sum' name='[sum:Sales:qk]' pivot='key' type='quantitative' />
-            <column-instance column='[Calculation_409264668296503296]' derivation='User' name='[usr:Calculation_409264668296503296:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_128634116853579776]' derivation='User' name='[usr:Calculation_128634116853579776:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_128634116855738369]' derivation='User' name='[usr:Calculation_128634116855738369:nk]' pivot='key' type='nominal' />
           </datasource-dependencies>
+          <filter class='categorical' column='[federated.0v8qjr91w7pqpm195b1br1bn8d6c].[:Measure Names]'>
+            <groupfilter function='union' user:op='manual'>
+              <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.0v8qjr91w7pqpm195b1br1bn8d6c].[sum:Profit:qk]&quot;' />
+              <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.0v8qjr91w7pqpm195b1br1bn8d6c].[sum:Sales:qk]&quot;' />
+              <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.0v8qjr91w7pqpm195b1br1bn8d6c].[usr:Calculation_128634116853579776:qk]&quot;' />
+            </groupfilter>
+          </filter>
+          <manual-sort column='[federated.0v8qjr91w7pqpm195b1br1bn8d6c].[none:Sub-Category:nk]' direction='ASC'>
+            <dictionary>
+              <bucket>&quot;Phones&quot;</bucket>
+              <bucket>&quot;Chairs&quot;</bucket>
+              <bucket>&quot;Storage&quot;</bucket>
+              <bucket>&quot;Tables&quot;</bucket>
+              <bucket>&quot;Binders&quot;</bucket>
+              <bucket>&quot;Machines&quot;</bucket>
+              <bucket>&quot;Accessories&quot;</bucket>
+              <bucket>&quot;Copiers&quot;</bucket>
+              <bucket>&quot;Bookcases&quot;</bucket>
+              <bucket>&quot;Appliances&quot;</bucket>
+              <bucket>&quot;Furnishings&quot;</bucket>
+              <bucket>&quot;Paper&quot;</bucket>
+              <bucket>&quot;Supplies&quot;</bucket>
+              <bucket>&quot;Art&quot;</bucket>
+              <bucket>&quot;Envelopes&quot;</bucket>
+              <bucket>&quot;Labels&quot;</bucket>
+              <bucket>&quot;Fasteners&quot;</bucket>
+              <bucket>%all%</bucket>
+            </dictionary>
+          </manual-sort>
+          <slices>
+            <column>[federated.0v8qjr91w7pqpm195b1br1bn8d6c].[:Measure Names]</column>
+          </slices>
           <aggregation value='true' />
         </view>
         <style />
@@ -1727,22 +1063,64 @@
             </view>
             <mark class='Automatic' />
             <encodings>
-              <text column='[federated.10zekwd1nr93pp1bwie471bazc9e].[sum:Sales:qk]' />
-              <text column='[federated.10zekwd1nr93pp1bwie471bazc9e].[usr:Calculation_409264668296503296:qk]' />
-              <text column='[federated.0i0j29z0yt1rbs11bw5rj1ycnlfr].[sum:Office City Sales:qk]' />
+              <color column='[federated.0v8qjr91w7pqpm195b1br1bn8d6c].[usr:Calculation_128634116855738369:nk]' />
+              <text column='[federated.0v8qjr91w7pqpm195b1br1bn8d6c].[Multiple Values]' />
             </encodings>
             <style>
               <style-rule element='mark'>
-                <format attr='mark-labels-show' value='true' />
                 <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-show' value='true' />
               </style-rule>
             </style>
           </pane>
         </panes>
-        <rows>[federated.10zekwd1nr93pp1bwie471bazc9e].[none:State:nk]</rows>
-        <cols />
+        <rows>[federated.0v8qjr91w7pqpm195b1br1bn8d6c].[none:Sub-Category:nk]</rows>
+        <cols>[federated.0v8qjr91w7pqpm195b1br1bn8d6c].[:Measure Names]</cols>
       </table>
-      <simple-id uuid='{B03DD7C8-8C75-4470-B5C7-1B6D6AE5F069}' />
+      <simple-id uuid='{F39425F2-F850-49D8-9404-57893925400B}' />
+    </worksheet>
+    <worksheet name='Sheet 9'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Orders+ (Sample - Superstore)' name='federated.0v8qjr91w7pqpm195b1br1bn8d6c' />
+          </datasources>
+          <mapsources>
+            <mapsource name='Tableau' />
+          </mapsources>
+          <datasource-dependencies datasource='federated.0v8qjr91w7pqpm195b1br1bn8d6c'>
+            <column caption='profit ststus' datatype='string' name='[Calculation_128634116855738369]' role='measure' type='nominal'>
+              <calculation class='tableau' formula='IF SUM([Sales])&gt;= 45000 THEN&#13;&#10;&apos;high profit&apos;&#13;&#10;ELSEIF sum([Sales])&gt;30000 THEN&#13;&#10;&apos;medium profit&apos;&#13;&#10;ELSE&#13;&#10;&apos;no profit&apos;&#13;&#10;END' />
+            </column>
+            <column datatype='real' name='[Sales]' role='measure' type='quantitative' />
+            <column datatype='string' name='[State]' role='dimension' semantic-role='[State].[Name]' type='nominal' />
+            <column-instance column='[State]' derivation='None' name='[none:State:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Calculation_128634116855738369]' derivation='User' name='[usr:Calculation_128634116855738369:nk]' pivot='key' type='nominal' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='map'>
+            <format attr='washout' value='0.0' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[federated.0v8qjr91w7pqpm195b1br1bn8d6c].[usr:Calculation_128634116855738369:nk]' />
+              <lod column='[federated.0v8qjr91w7pqpm195b1br1bn8d6c].[none:State:nk]' />
+              <geometry column='[federated.0v8qjr91w7pqpm195b1br1bn8d6c].[Geometry (generated)]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>[federated.0v8qjr91w7pqpm195b1br1bn8d6c].[Latitude (generated)]</rows>
+        <cols>[federated.0v8qjr91w7pqpm195b1br1bn8d6c].[Longitude (generated)]</cols>
+      </table>
+      <simple-id uuid='{AD96BB43-FB50-41DF-965A-557A8004AF07}' />
     </worksheet>
   </worksheets>
   <dashboards>
@@ -1817,8 +1195,36 @@
       </devicelayouts>
       <simple-id uuid='{92DFEE6A-42E2-49AF-B13F-93E04D260B27}' />
     </dashboard>
+    <dashboard name='Story 1' type='storyboard'>
+      <style />
+      <size maxheight='964' maxwidth='1016' minheight='964' minwidth='1016' />
+      <zones>
+        <zone h='100000' id='2' type-v2='layout-basic' w='100000' x='0' y='0'>
+          <zone h='98340' id='1' param='vert' removable='false' type-v2='layout-flow' w='98426' x='787' y='830'>
+            <zone h='3423' id='3' type-v2='title' w='98426' x='787' y='830' />
+            <zone h='10477' id='4' is-fixed='true' paired-zone-id='5' removable='false' type-v2='flipboard-nav' w='98426' x='787' y='4253' />
+            <zone h='84440' id='5' paired-zone-id='4' removable='false' type-v2='flipboard' w='98426' x='787' y='14730'>
+              <flipboard active-id='4' nav-type='caption' show-nav-arrows='true'>
+                <story-points>
+                  <story-point caption='filter' captured-sheet='Sheet 7' id='2' />
+                  <story-point caption='profit status' captured-sheet='Sheet 8' id='3' />
+                  <story-point caption='profit status map' captured-sheet='Sheet 9' id='4' />
+                </story-points>
+              </flipboard>
+            </zone>
+          </zone>
+          <zone-style>
+            <format attr='border-color' value='#000000' />
+            <format attr='border-style' value='none' />
+            <format attr='border-width' value='0' />
+            <format attr='margin' value='8' />
+          </zone-style>
+        </zone>
+      </zones>
+      <simple-id uuid='{AE5C16C3-0BBC-40F7-90B5-F7705DA3D96B}' />
+    </dashboard>
   </dashboards>
-  <windows source-height='72'>
+  <windows source-height='30'>
     <window class='worksheet' name='Sheet 1'>
       <cards>
         <edge name='left'>
@@ -2005,8 +1411,14 @@
             <card type='title' />
           </strip>
         </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card param='[federated.0v8qjr91w7pqpm195b1br1bn8d6c].[none:Sub-Category:nk]' type='filter' values='relevant' />
+            <card param='[federated.0v8qjr91w7pqpm195b1br1bn8d6c].[none:Category:nk]' type='filter' />
+          </strip>
+        </edge>
       </cards>
-      <simple-id uuid='{5D8A608D-1C3F-4B81-9703-B7EC61A678F4}' />
+      <simple-id uuid='{8DC4D975-A8CC-4619-A9FA-929F21F5C28A}' />
     </window>
     <window class='worksheet' maximized='true' name='Sheet 8'>
       <cards>
@@ -2015,6 +1427,7 @@
             <card type='pages' />
             <card type='filters' />
             <card type='marks' />
+            <card type='measures' />
           </strip>
         </edge>
         <edge name='top'>
@@ -2028,8 +1441,13 @@
             <card type='title' />
           </strip>
         </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='0' param='[federated.0v8qjr91w7pqpm195b1br1bn8d6c].[usr:Calculation_128634116855738369:nk]' type='color' />
+          </strip>
+        </edge>
       </cards>
-      <simple-id uuid='{E7258D79-76D1-40A6-BA93-B5C3EC53850E}' />
+      <simple-id uuid='{05250017-6A77-492E-BD29-4E63332800BC}' />
     </window>
     <window class='worksheet' name='Sheet 9'>
       <cards>
@@ -2051,8 +1469,18 @@
             <card type='title' />
           </strip>
         </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='0' param='[federated.0v8qjr91w7pqpm195b1br1bn8d6c].[usr:Calculation_128634116855738369:nk]' type='color' />
+          </strip>
+        </edge>
       </cards>
-      <simple-id uuid='{79A6D6D5-4D49-414F-84E4-D8D449475140}' />
+      <simple-id uuid='{F2C6A152-EC06-4391-B04D-84F106DC3D43}' />
+    </window>
+    <window class='dashboard' name='Story 1'>
+      <viewpoints />
+      <active id='-1' />
+      <simple-id uuid='{39F8B548-3D81-4B0D-832B-E65DB6261AC3}' />
     </window>
   </windows>
 </workbook>
